@@ -16,10 +16,12 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       require: true,
+      select: false,
     },
     salt: {
       type: String,
       require: true,
+      select: false,
     },
   },
   modelOptions
@@ -42,3 +44,5 @@ userSchema.method.validPassword = function (password) {
 const userModel = mongoose.model("User", userSchema);
 
 export default userModel;
+
+select: false;
