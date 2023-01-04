@@ -30,7 +30,7 @@ const tmdbApi = {
       tmdbEndpoints.mediaSearch({ mediaType, query, page })
     ),
 
-  personDetails: async ({ personId }) =>
+  personDetail: async ({ personId }) =>
     await axiosClient.get(tmdbEndpoints.personDetail({ personId })),
 
   personMedias: async ({ personId }) =>
