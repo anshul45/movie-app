@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import themeModeSlice from "./features/themeMode.Slice";
-import userSlice from "./features/user.slice";
+import themeModeSlice from "./features/themeModeSlice";
+import userSlice from "./features/userSlice";
 import authModalSlice from "./features/authModalSlice";
 import globalLoadingSlice from "./features/globalLoadingSlice";
 import appStateSlice from "./features/appStateSlice";
