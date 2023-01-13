@@ -38,7 +38,7 @@ const App = () => {
                   element={
                     route.state ? (
                       <PageWrapper state={route.state}>
-                        (route.element)
+                        {route.element}
                       </PageWrapper>
                     ) : (
                       route.element
@@ -52,7 +52,7 @@ const App = () => {
                   element={
                     route.state ? (
                       <PageWrapper state={route.state}>
-                        (route.element)
+                        {route.element}
                       </PageWrapper>
                     ) : (
                       route.element
