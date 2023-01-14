@@ -5,7 +5,7 @@ import Logo from "./Logo";
 const GlobalLoading = () => {
   const { globalLoading } = useSelector((state) => state.globalLoading);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (globalLoading) {
@@ -15,6 +15,7 @@ const GlobalLoading = () => {
         setIsLoading(false);
       }, 1000);
     }
+    // eslint-disable-next-line
   }, [globalLoading]);
 
   return (
@@ -22,7 +23,7 @@ const GlobalLoading = () => {
       <Paper
         sx={{
           opacity: isLoading ? 1 : 0,
-          PointerEvent: "none",
+          pointerEvents: "none",
           transition: "all .3s ease",
           position: "fixed",
           width: "100vw",
@@ -30,19 +31,18 @@ const GlobalLoading = () => {
           zIndex: 999,
         }}
       >
-        <Toolbar>
-          <LinearProgress />
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%,-50%)",
-            }}
-          >
-            <Logo />
-          </Box>
-        </Toolbar>
+        <Toolbar />
+        <LinearProgress />
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%,-50%)",
+          }}
+        >
+          <Logo />
+        </Box>
       </Paper>
     </>
   );
