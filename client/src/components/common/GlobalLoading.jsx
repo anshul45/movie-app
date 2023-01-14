@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { Paper, Box, LinearProgress, Toolbar } from "@mui/material";
 import { useState, useEffect } from "react";
 import Logo from "./Logo";
+
 const GlobalLoading = () => {
   const { globalLoading } = useSelector((state) => state.globalLoading);
 

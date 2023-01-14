@@ -1,4 +1,4 @@
-const uiConfig = {
+const uiConfigs = {
   style: {
     gradientBgImage: {
       dark: {
@@ -44,4 +44,4 @@ const uiConfig = {
     contentMaxWidth: "1366px",
   },
 };
-export default uiConfig;
+export default uiConfigs;
