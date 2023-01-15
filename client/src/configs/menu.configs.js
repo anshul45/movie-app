@@ -5,6 +5,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
 import LockResetOutlinedIcon from "@mui/icons-material/LockResetOutlined";
+
 const main = [
   {
     display: "home",
@@ -22,10 +23,10 @@ const main = [
     display: "tv series",
     path: "/tv",
     icon: <LiveTvOutlinedIcon />,
-    state: "hometv",
+    state: "tv",
   },
   {
-    display: "Search",
+    display: "search",
     path: "/search",
     icon: <SearchOutlinedIcon />,
     state: "search",
