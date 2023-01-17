@@ -57,6 +57,9 @@ const Topbar = () => {
       themeMode === themeModes.dark ? themeModes.light : themeModes.dark;
     dispatch(setThemeMode(theme));
   };
+
+  const toggleSidebar = () => setsidebarOpen(!sidebarOpen);
+
   return (
     <>
       <ScrollAppBar>
@@ -73,6 +76,7 @@ const Topbar = () => {
               <IconButton
                 color="inherit"
                 sx={{ mr: 2, display: { md: "none" } }}
+                onClick={toggleSidebar}
               >
                 <MenuIcon />
               </IconButton>
@@ -113,7 +117,18 @@ const Topbar = () => {
             {/* main menu */}
 
             {/* user menu */}
-            <UserMenu />
+            <Stack spacing={3} direction="row" alignItems="center">
+              {!user && (
+                <Button
+                  variant="contained"
+                  onClick={() => dispatch(setAuthModalOpen(true))}
+                >
+                  sign in
+                </Button>
+              )}
+            </Stack>
+            {user && <UserMenu />}
+
             {/* user menu */}
           </Toolbar>
         </AppBar>
