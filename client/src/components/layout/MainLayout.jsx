@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
+import AuthModal from "../common/AuthModal";
 import Footer from "../common/Footer";
 import GlobalLoading from "../common/GlobalLoading";
 import Topbar from "../common/Topbar";
@@ -10,10 +11,9 @@ const MainLayout = () => {
       {/* global loading */}
       <GlobalLoading />
       {/* global loading */}
-
+      {/* login modal */}\
+      <AuthModal />
       {/* login modal */}
-      {/* login modal */}
-
       <Box diaplay="flex" minHeight="100vh">
         {/* header */}
         <Topbar />
