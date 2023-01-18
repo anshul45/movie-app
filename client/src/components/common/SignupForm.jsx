@@ -27,29 +27,34 @@ const SignupForm = ({ switchAuthState }) => {
         .min(8, "username minimum 8 characters")
         .required("username is required"),
       password: Yup.string()
-        .min(8, "username minimum 8 characters")
-        .required("username is required"),
+        .min(8, "password minimum 8 characters")
+        .required("password is required"),
       displayName: Yup.string()
         .min(8, "displayName minimum 8 characters")
         .required("displayName is required"),
       confirmPassword: Yup.string()
+        .oneOf([Yup.ref("password")], "confirmPassword not match")
         .min(8, "confirmPassword minimum 8 characters")
         .required("confirmPassword is required"),
     }),
     onSubmit: async (values) => {
       setErrorMessage(undefined);
       setIsLoginRequest(true);
+      console.log("asdasdasdasd");
       const { response, err } = await userApi.signup(values);
       setIsLoginRequest(false);
+
       if (response) {
         signinForm.resetForm();
         dispatch(setUser(response));
         dispatch(setAuthModalOpen(false));
         toast.success("Sign in success");
       }
+
       if (err) setErrorMessage(err.message);
     },
   });
+
   return (
     <Box component="form" onSubmit={signinForm.handleSubmit}>
       <Stack spacing={3}>
@@ -115,6 +120,7 @@ const SignupForm = ({ switchAuthState }) => {
           }
         />
       </Stack>
+
       <LoadingButton
         type="submit"
         fullWidth
@@ -125,9 +131,11 @@ const SignupForm = ({ switchAuthState }) => {
       >
         sign up
       </LoadingButton>
+
       <Button fullWidth sx={{ marginTop: 1 }} onClick={() => switchAuthState()}>
         sign in
       </Button>
+
       {errorMessage && (
         <Box sx={{ marginTop: 2 }}>
           <Alert severity="error" variant="outlined">
