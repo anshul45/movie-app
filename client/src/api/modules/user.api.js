@@ -33,7 +33,7 @@ const userApi = {
       return { err };
     }
   },
-  getInfo: async ({}) => {
+  getInfo: async () => {
     try {
       const response = await privateClient.get(userEndpoints.getInfo);
       return { response };
