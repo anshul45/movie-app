@@ -1,7 +1,7 @@
 import privateClient from "../client/private.client";
 
 const favoriteEndpoints = {
-  list: "user/favorite",
+  list: "user/favorites",
   add: "user/favorites",
   remove: ({ favoriteId }) => `user/favorites/${favoriteId}`,
 };
@@ -10,7 +10,8 @@ const favoriteApi = {
   getList: async () => {
     try {
       const response = await privateClient.get(favoriteEndpoints.list);
-      return response;
+
+      return { response };
     } catch (err) {
       return { err };
     }
@@ -24,7 +25,8 @@ const favoriteApi = {
         mediaPoster,
         mediaRate,
       });
-      return response;
+
+      return { response };
     } catch (err) {
       return { err };
     }
@@ -32,9 +34,10 @@ const favoriteApi = {
   remove: async ({ favoriteId }) => {
     try {
       const response = await privateClient.delete(
-        favoriteEndpoints.delete({ favoriteId })
+        favoriteEndpoints.remove({ favoriteId })
       );
-      return response;
+
+      return { response };
     } catch (err) {
       return { err };
     }

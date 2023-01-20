@@ -16,6 +16,7 @@ const reviewApi = {
         mediaPoster,
         content,
       });
+
       return { response };
     } catch (err) {
       return { err };
@@ -23,9 +24,10 @@ const reviewApi = {
   },
   remove: async ({ reviewId }) => {
     try {
-      const response = await privateClient.post(
+      const response = await privateClient.delete(
         reviewEndpoints.remove({ reviewId })
       );
+
       return { response };
     } catch (err) {
       return { err };
@@ -34,6 +36,7 @@ const reviewApi = {
   getList: async () => {
     try {
       const response = await privateClient.get(reviewEndpoints.list);
+
       return { response };
     } catch (err) {
       return { err };

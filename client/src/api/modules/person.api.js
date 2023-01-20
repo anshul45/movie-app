@@ -11,6 +11,8 @@ const personApi = {
       const response = await publicClient.get(
         personEndpoints.detail({ personId })
       );
+
+      return { response };
     } catch (err) {
       return { err };
     }
@@ -20,6 +22,8 @@ const personApi = {
       const response = await publicClient.get(
         personEndpoints.medias({ personId })
       );
+
+      return { response };
     } catch (err) {
       return { err };
     }
