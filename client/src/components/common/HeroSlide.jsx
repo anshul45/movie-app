@@ -11,7 +11,7 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { AutoPlay } from "swiper";
+import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { toast } from "react-toastify";
 
@@ -59,7 +59,56 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
     getGenres();
   }, [mediaType, mediaCategory, dispatch]);
 
-  return <Box>HeroSlide</Box>;
+  return (
+    <Box
+      sx={{
+        position: "relative",
+        color: "primary.contrastText",
+        "&::before": {
+          content: '""',
+          width: "100%",
+          height: "30%",
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          zIndex: 2,
+          pointerEvent: "none",
+          ...uiConfigs.style.gradientBgImage[theme.palette.mode],
+        },
+      }}
+    >
+      <Swiper
+        grabCursor={true}
+        loop={true}
+        modules={[Autoplay]}
+        style={{ width: "100%", height: "max-content" }}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+      >
+        {movies.map((movie, index) => (
+          <SwiperSlide key={index}>
+            <Box
+              sx={{
+                paddingTop: {
+                  xs: "130%",
+                  sm: "80%",
+                  md: "60%",
+                  lg: "45%",
+                },
+                backgroundPosition: "top",
+                backdropSize: "cover",
+                backgroundImage: `url(${tmdbConfigs.backdropPath(
+                  movie.backdropPath(movie.backdrop_path || movie.poster_path)
+                )})`,
+              }}
+            ></Box>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </Box>
+  );
 };
 
 export default HeroSlide;

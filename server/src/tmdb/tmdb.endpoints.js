@@ -2,10 +2,11 @@ import tmdbConfig from "./tmdb.config.js";
 
 const tmdbEndpoints = {
   mediaList: ({ mediaType, mediaCategory, page }) =>
-    tmdbConfig.getUrl(`${mediaType}${mediaCategory}`, page),
+    tmdbConfig.getUrl(`${mediaType}${mediaCategory}`, { page }),
 
   mediaDetail: ({ mediaType, mediaId }) =>
     tmdbConfig.getUrl(`${mediaType}/${mediaId}`),
+
   mediaGenres: ({ mediaType }) => tmdbConfig.getUrl(`genre/${mediaType}/list`),
 
   mediaCredits: ({ mediaType, mediaId }) =>
@@ -21,7 +22,7 @@ const tmdbEndpoints = {
     tmdbConfig.getUrl(`${mediaType}/${mediaId}/Images`),
 
   mediaSearch: ({ mediaType, query, page }) =>
-    tmdbConfig.getUrl(`$search/{mediaType}`, { query, page }),
+    tmdbConfig.getUrl(`$search/${mediaType}`, { query, page }),
 
   personDetail: ({ personId }) => tmdbConfig.getUrl(`person/${personId}`),
 
