@@ -12,7 +12,7 @@ const tokenDecode = (req) => {
     }
     return false;
   } catch {
-    return flase;
+    return false;
   }
 };
 

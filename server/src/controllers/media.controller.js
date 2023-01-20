@@ -22,7 +22,7 @@ const getList = async (req, res) => {
   }
 };
 
-const getGeneres = async (req, res) => {
+const getGenres = async (req, res) => {
   try {
     const { mediaType } = req.params;
 
@@ -91,4 +91,4 @@ const getDetail = async (req, res) => {
   }
 };
 
-export default { getList, getGeneres, search, getDetail };
+export default { getList, getGenres, search, getDetail };
