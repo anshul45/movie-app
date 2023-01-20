@@ -29,12 +29,13 @@ const ScrollAppBar = ({ children, window }) => {
     threshold: 50,
     target: window ? window() : undefined,
   });
+
   return cloneElement(children, {
     sx: {
       color: trigger
         ? "text.primary"
         : themeMode === themeModes.dark
-        ? "primry.constrastText"
+        ? "primary.contrastText"
         : "text.primary",
       backgroundColor: trigger
         ? "background.paper"
@@ -49,28 +50,23 @@ const Topbar = () => {
   const { appState } = useSelector((state) => state.appState);
   const { themeMode } = useSelector((state) => state.themeMode);
 
-  const [sidebarOpen, setsidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const dispatch = useDispatch();
 
-  const onSwitchTheme = () => {
+  const onSwithTheme = () => {
     const theme =
       themeMode === themeModes.dark ? themeModes.light : themeModes.dark;
     dispatch(setThemeMode(theme));
   };
 
-  const toggleSidebar = () => setsidebarOpen(!sidebarOpen);
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
     <>
       <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
       <ScrollAppBar>
-        <AppBar
-          elevation={0}
-          sx={{
-            zIndex: 9999,
-          }}
-        >
+        <AppBar elevation={0} sx={{ zIndex: 9999 }}>
           <Toolbar
             sx={{ alignItems: "center", justifyContent: "space-between" }}
           >
@@ -82,10 +78,12 @@ const Topbar = () => {
               >
                 <MenuIcon />
               </IconButton>
+
               <Box sx={{ display: { xs: "inline-block", md: "none" } }}>
                 <Logo />
               </Box>
             </Stack>
+
             {/* main menu */}
             <Box
               flexGrow={1}
@@ -111,7 +109,7 @@ const Topbar = () => {
                   {item.display}
                 </Button>
               ))}
-              <IconButton sx={{ color: "inherit" }} onClick={onSwitchTheme}>
+              <IconButton sx={{ color: "inherit" }} onClick={onSwithTheme}>
                 {themeMode === themeModes.dark && <DarkModeOutlinedIcon />}
                 {themeMode === themeModes.light && <WbSunnyOutlinedIcon />}
               </IconButton>
@@ -130,7 +128,6 @@ const Topbar = () => {
               )}
             </Stack>
             {user && <UserMenu />}
-
             {/* user menu */}
           </Toolbar>
         </AppBar>

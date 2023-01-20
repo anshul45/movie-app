@@ -25,6 +25,7 @@ const AuthModal = () => {
   const handleClose = () => dispatch(setAuthModalOpen(false));
 
   const switchAuthState = (state) => setAction(state);
+
   return (
     <Modal open={authModalOpen} onClose={handleClose}>
       <Box
@@ -32,7 +33,7 @@ const AuthModal = () => {
           position: "absolute",
           top: "50%",
           left: "50%",
-          transform: "translate(-50%,-50%)",
+          transform: "translate(-50%, -50%)",
           width: "100%",
           maxWidth: "600px",
           padding: 4,
@@ -49,11 +50,13 @@ const AuthModal = () => {
           <Box sx={{ textAlign: "center", marginBottom: "2rem" }}>
             <Logo />
           </Box>
+
           {action === actionState.signin && (
             <SigninForm
               switchAuthState={() => switchAuthState(actionState.signup)}
             />
           )}
+
           {action === actionState.signup && (
             <SignupForm
               switchAuthState={() => switchAuthState(actionState.signin)}

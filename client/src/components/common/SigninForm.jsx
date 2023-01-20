@@ -25,23 +25,27 @@ const SigninForm = ({ switchAuthState }) => {
         .min(8, "username minimum 8 characters")
         .required("username is required"),
       password: Yup.string()
-        .min(8, "username minimum 8 characters")
-        .required("username is required"),
+        .min(8, "password minimum 8 characters")
+        .required("password is required"),
     }),
     onSubmit: async (values) => {
       setErrorMessage(undefined);
       setIsLoginRequest(true);
+      console.log("asdasdasdasd");
       const { response, err } = await userApi.signin(values);
       setIsLoginRequest(false);
+
       if (response) {
         signinForm.resetForm();
         dispatch(setUser(response));
         dispatch(setAuthModalOpen(false));
         toast.success("Sign in success");
       }
+
       if (err) setErrorMessage(err.message);
     },
   });
+
   return (
     <Box component="form" onSubmit={signinForm.handleSubmit}>
       <Stack spacing={3}>
@@ -74,6 +78,7 @@ const SigninForm = ({ switchAuthState }) => {
           helperText={signinForm.touched.password && signinForm.errors.password}
         />
       </Stack>
+
       <LoadingButton
         type="submit"
         fullWidth
@@ -84,9 +89,11 @@ const SigninForm = ({ switchAuthState }) => {
       >
         sign in
       </LoadingButton>
+
       <Button fullWidth sx={{ marginTop: 1 }} onClick={() => switchAuthState()}>
         sign up
       </Button>
+
       {errorMessage && (
         <Box sx={{ marginTop: 2 }}>
           <Alert severity="error" variant="outlined">

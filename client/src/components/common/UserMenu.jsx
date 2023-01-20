@@ -14,11 +14,13 @@ import { setUser } from "../../redux/features/userSlice";
 
 const UserMenu = () => {
   const { user } = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = useState(null);
 
   const toggleMenu = (e) => setAnchorEl(e.currentTarget);
+
   return (
     <>
       {user && (
@@ -28,7 +30,7 @@ const UserMenu = () => {
             sx={{ cursor: "pointer", userSelect: "none" }}
             onClick={toggleMenu}
           >
-            {user.displayname}
+            {user.displayName}
           </Typography>
           <Menu
             open={Boolean(anchorEl)}

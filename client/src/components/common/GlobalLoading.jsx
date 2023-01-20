@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
 import { Paper, Box, LinearProgress, Toolbar } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Logo from "./Logo";
 
 const GlobalLoading = () => {
   const { globalLoading } = useSelector((state) => state.globalLoading);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (globalLoading) {
@@ -16,7 +16,6 @@ const GlobalLoading = () => {
         setIsLoading(false);
       }, 1000);
     }
-    // eslint-disable-next-line
   }, [globalLoading]);
 
   return (
@@ -39,7 +38,7 @@ const GlobalLoading = () => {
             position: "absolute",
             top: "50%",
             left: "50%",
-            transform: "translate(-50%,-50%)",
+            transform: "translate(-50%, -50%)",
           }}
         >
           <Logo />

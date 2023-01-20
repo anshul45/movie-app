@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Stack } from "@mui/material";
+import { Paper, Stack, Button, Box } from "@mui/material";
 import React from "react";
 import Container from "./Container";
 import Logo from "./Logo";
@@ -12,7 +12,7 @@ const Footer = () => {
         <Stack
           alignItems="center"
           justifyContent="space-between"
-          direction={{ xs: "column", md: "row" }}
+          direction={{ xs: "column", md: "row " }}
           sx={{ height: "max-content" }}
         >
           <Logo />

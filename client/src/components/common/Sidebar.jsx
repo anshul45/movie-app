@@ -8,13 +8,9 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import { Link } from "react-router-dom";
-
 import menuConfigs from "../../configs/menu.configs";
-
 import Logo from "./Logo";
 import uiConfigs from "../../configs/ui.configs";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
@@ -47,7 +43,7 @@ const Sidebar = ({ open, toggleSidebar }) => {
       </Toolbar>
       <List sx={{ paddingX: "30px" }}>
         <Typography variant="h6" marginBottom="20px">
-          Menu
+          MENU
         </Typography>
         {menuConfigs.main.map((item, index) => (
           <ListItemButton
@@ -74,6 +70,7 @@ const Sidebar = ({ open, toggleSidebar }) => {
             />
           </ListItemButton>
         ))}
+
         {user && (
           <>
             <Typography variant="h6" marginBottom="20px">
@@ -106,10 +103,10 @@ const Sidebar = ({ open, toggleSidebar }) => {
             ))}
           </>
         )}
+
         <Typography variant="h6" marginBottom="20px">
           THEME
         </Typography>
-
         <ListItemButton onClick={onSwitchTheme}>
           <ListItemIcon>
             {themeMode === themeModes.dark && <DarkModeOutlinedIcon />}
@@ -135,7 +132,7 @@ const Sidebar = ({ open, toggleSidebar }) => {
       sx={{
         "& .MuiDrawer-Paper": {
           boxSizing: "border-box",
-          width: sidebarWidth,
+          widh: sidebarWidth,
           borderRight: "0px",
         },
       }}
