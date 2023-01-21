@@ -1,4 +1,4 @@
-import PlayArrow from "@mui/icons-material/PlayArrow";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import {
   Box,
   Button,
@@ -24,7 +24,7 @@ import CircularRate from "./CircularRate";
 
 import tmdbConfigs from "../../api/configs/tmdb.configs";
 import genreApi from "../../api/modules/genre.api";
-import mediaAPi from "../../api/modules/media.api";
+import mediaApi from "../../api/modules/media.api";
 
 const HeroSlide = ({ mediaType, mediaCategory }) => {
   const theme = useTheme();
@@ -35,18 +35,21 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
 
   useEffect(() => {
     const getMedias = async () => {
-      const { response, err } = await mediaAPi.getList({
+      const { response, err } = await mediaApi.getList({
         mediaType,
         mediaCategory,
         page: 1,
       });
+
       if (response) setMovies(response.results);
       if (err) toast.error(err.message);
       dispatch(setGlobalLoading(false));
     };
+
     const getGenres = async () => {
       dispatch(setGlobalLoading(true));
       const { response, err } = await genreApi.getList({ mediaType });
+
       if (response) {
         setGenres(response.genres);
         getMedias();
@@ -56,6 +59,7 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
         setGlobalLoading(false);
       }
     };
+
     getGenres();
   }, [mediaType, mediaCategory, dispatch]);
 
@@ -84,7 +88,7 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
         style={{ width: "100%", height: "max-content" }}
         // autoplay={{
         //   delay: 3000,
-        //   disableOnInteraction: false,
+        //   disableOnInteraction: false
         // }}
       >
         {movies.map((movie, index) => (
@@ -98,11 +102,10 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
                   lg: "45%",
                 },
                 backgroundPosition: "top",
-                backdropSize: "cover",
+                backgroundSize: "cover",
                 backgroundImage: `url(${tmdbConfigs.backdropPath(
                   movie.backdrop_path || movie.poster_path
-                )})
-                 `,
+                )})`,
               }}
             />
             <Box
@@ -124,11 +127,7 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
                 position: "absolute",
                 top: 0,
                 left: 0,
-                paddingX: {
-                  sm: "10px",
-                  md: "5rem",
-                  lg: "10rem",
-                },
+                paddingX: { sm: "10px", md: "5rem", lg: "10rem" },
               }}
             >
               <Box
@@ -154,6 +153,7 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
                     {movie.title || movie.name}
                   </Typography>
                   {/* title */}
+
                   <Stack direction="row" spacing={1} alignItems="center">
                     {/* rating */}
                     <CircularRate value={movie.vote_average} />
@@ -174,6 +174,7 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
                     ))}
                     {/* genres */}
                   </Stack>
+
                   {/* overview */}
                   <Typography
                     variant="body1"
@@ -185,11 +186,11 @@ const HeroSlide = ({ mediaType, mediaCategory }) => {
                   </Typography>
                   {/* overview */}
 
-                  {/* buttons  */}
+                  {/* buttons */}
                   <Button
                     variant="contained"
                     size="large"
-                    startIcon={<PlayArrow />}
+                    startIcon={<PlayArrowIcon />}
                     component={Link}
                     to={routesGen.mediaDetail(mediaType, movie.id)}
                     sx={{ width: "max-content" }}
