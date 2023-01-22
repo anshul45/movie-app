@@ -97,7 +97,7 @@ router.post(
   tokenMiddleware.auth,
   body("mediatype")
     .exists()
-    .withMessage("mediatype is required")
+    .withMessage("mediaType is required")
     .custom((type) => ["movie", "tv"].includes(type))
     .withMessage("mediaType invalid"),
   body("mediaId")

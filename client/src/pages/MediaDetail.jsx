@@ -58,6 +58,37 @@ const MediaDetail = () => {
     getMedia();
   }, [mediaType, mediaId, dispatch]);
 
+  const onFavoriteClick = async () => {
+    if (!user) return dispatch(setAuthModalOpen(true));
+
+    if (onRequest) return;
+
+    if (isFavorite) {
+      return;
+    }
+
+    setOnRequest(true);
+
+    const body = {
+      mediaId: media.id,
+      mediaTitle: media.title || media.name,
+      mediaType: mediaType,
+      mediaPoster: media.poster_path,
+      mediaRate: media.vote_average,
+    };
+
+    const { response, err } = await favoriteApi.add(body);
+
+    setOnRequest(false);
+
+    if (err) toast.error(err.message);
+    if (response) {
+      dispatch(addFavorite(response));
+      setIsFavorite(true);
+      toast.success("Add favorite success");
+    }
+  };
+
   return media ? (
     <>
       <ImageHeader
@@ -172,7 +203,7 @@ const MediaDetail = () => {
                     }
                     loadingPosition="start"
                     loading={onRequest}
-                    // onClick=
+                    onClick={onFavoriteClick}
                   />
                   <Button
                     variant="contained"

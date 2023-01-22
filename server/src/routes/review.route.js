@@ -21,9 +21,9 @@ router.post(
     .withMessage("content is required")
     .isLength({ min: 1 })
     .withMessage("content can not be empty"),
-  body("mediatype")
+  body("mediaType")
     .exists()
-    .withMessage("mediatype is required")
+    .withMessage("mediaType is required")
     .custom((type) => ["movie", "tv"].includes(type))
     .withMessage("mediaType invalid"),
   body("mediaTitle").exists().withMessage("mediaTitle is required"),
