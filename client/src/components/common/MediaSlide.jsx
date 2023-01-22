@@ -3,6 +3,7 @@ import { SwiperSlide } from "swiper/react";
 import mediaApi from "../../api/modules/media.api";
 import AutoSwiper from "./AutoSwiper";
 import { toast } from "react-toastify";
+import MediaItem from "./MediaItem";
 
 const MediaSlide = ({ mediaType, mediaCategory }) => {
   const [medias, setMedias] = useState([]);
@@ -19,7 +20,15 @@ const MediaSlide = ({ mediaType, mediaCategory }) => {
     getMedias();
   }, [mediaType, mediaCategory]);
 
-  return <>media slide</>;
+  return (
+    <AutoSwiper>
+      {medias.map((media, index) => (
+        <SwiperSlide key={index}>
+          <MediaItem media={media} mediaType={mediaType} />
+        </SwiperSlide>
+      ))}
+    </AutoSwiper>
+  );
 };
 
 export default MediaSlide;
