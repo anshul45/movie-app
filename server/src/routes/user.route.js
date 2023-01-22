@@ -95,7 +95,7 @@ router.get(
 router.post(
   "/favorites",
   tokenMiddleware.auth,
-  body("mediatype")
+  body("mediaype")
     .exists()
     .withMessage("mediaType is required")
     .custom((type) => ["movie", "tv"].includes(type))
