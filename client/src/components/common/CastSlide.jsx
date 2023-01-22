@@ -11,7 +11,7 @@ const CastSlide = ({ casts }) => {
       sx={{
         "& .swiper-slide": {
           width: { xs: "50%", md: "25%", lg: "20.5%" },
-          color: "primary.constrastText",
+          color: "primary.contrastText",
         },
       }}
     >
@@ -19,10 +19,7 @@ const CastSlide = ({ casts }) => {
         spaceBetween={10}
         slidesPerView={"auto"}
         grabCursor={true}
-        style={{
-          width: "100%",
-          height: "max-content",
-        }}
+        style={{ width: "100%", height: "max-content" }}
       >
         {casts.map((cast, index) => (
           <SwiperSlide key={index}>

@@ -7,6 +7,7 @@ import MediaItem from "./MediaItem";
 
 const MediaSlide = ({ mediaType, mediaCategory }) => {
   const [medias, setMedias] = useState([]);
+
   useEffect(() => {
     const getMedias = async () => {
       const { response, err } = await mediaApi.getList({
@@ -14,9 +15,11 @@ const MediaSlide = ({ mediaType, mediaCategory }) => {
         mediaCategory,
         page: 1,
       });
+
       if (response) setMedias(response.results);
       if (err) toast.error(err.message);
     };
+
     getMedias();
   }, [mediaType, mediaCategory]);
 

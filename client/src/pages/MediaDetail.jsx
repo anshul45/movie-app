@@ -40,8 +40,9 @@ const MediaDetail = () => {
   const videoRef = useRef(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const getMedia = async () => {
-      dispatch(setGlobalLoading);
+      dispatch(setGlobalLoading(true));
       const { response, err } = await mediaApi.getDetail({
         mediaType,
         mediaId,
@@ -53,6 +54,7 @@ const MediaDetail = () => {
         setIsFavorite(response.isFavorite);
         setGenres(response.genres.splice(0, 2));
       }
+
       if (err) toast.error(err.message);
     };
 
@@ -94,6 +96,7 @@ const MediaDetail = () => {
   const onRemoveFavorite = async () => {
     if (onRequest) return;
     setOnRequest(true);
+
     const favorite = listFavorites.find(
       (e) => e.mediaId.toString() === media.id.toString()
     );
@@ -121,27 +124,27 @@ const MediaDetail = () => {
       />
       <Box
         sx={{
-          color: "primary.constrastText",
+          color: "primary.contrastText",
           ...uiConfigs.style.mainContent,
         }}
       >
-        {/* media Content */}
+        {/* media content */}
         <Box
           sx={{
             marginTop: { xs: "-10rem", md: "-15rem", lg: "-20rem" },
           }}
         >
-          {/* poster */}
           <Box
             sx={{
-              width: { xs: "70%", sm: "50%", md: "40%" },
-              margin: { xs: "0 auto 2rem", md: "0 2rem 0 0" },
+              display: "flex",
+              flexDirection: { md: "row", xs: "column" },
             }}
           >
+            {/* poster */}
             <Box
               sx={{
-                display: "flex",
-                flexDirection: { md: "row", xs: "column" },
+                width: { xs: "70%", sm: "50%", md: "40%" },
+                margin: { xs: "0 auto 2rem", md: "0 2rem 0 0" },
               }}
             >
               <Box
@@ -214,7 +217,7 @@ const MediaDetail = () => {
                     variant="text"
                     sx={{
                       width: "max-content",
-                      "& .MuiButton-starIcon": { marginRight: "0" },
+                      "& .MuiButon-starIcon": { marginRight: "0" },
                     }}
                     size="large"
                     startIcon={
@@ -239,23 +242,23 @@ const MediaDetail = () => {
                   </Button>
                 </Stack>
                 {/* buttons */}
-                {/* cast */}
 
+                {/* cast */}
                 <Container header="Cast">
                   <CastSlide casts={media.credits.cast} />
                 </Container>
                 {/* cast */}
               </Stack>
             </Box>
-
             {/* media info */}
           </Box>
         </Box>
-        {/* media Content */}
+        {/* media content */}
+
         {/* media videos */}
         <div ref={videoRef} style={{ paddingTop: "2rem" }}>
           <Container header="Videos">
-            <MediaVideosSlide videos={media.videos.results} />
+            <MediaVideosSlide videos={[...media.videos.results].splice(0, 5)} />
           </Container>
         </div>
         {/* media videos */}

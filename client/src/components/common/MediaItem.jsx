@@ -12,6 +12,7 @@ import favoriteUtils from "../../utils/favorite.utils";
 
 const MediaItem = ({ media, mediaType }) => {
   const { listFavorites } = useSelector((state) => state.user);
+
   const [title, setTitle] = useState("");
   const [posterPath, setPosterPath] = useState("");
   const [releaseDate, setReleaseDate] = useState(null);
@@ -30,10 +31,10 @@ const MediaItem = ({ media, mediaType }) => {
     );
 
     if (mediaType === tmdbConfigs.mediaType.movie) {
-      setReleaseDate(media.release_date && media.release_date.split("_")[0]);
+      setReleaseDate(media.release_date && media.release_date.split("-")[0]);
     } else {
       setReleaseDate(
-        media.first_air_date && media.first_air_date.split("_")[0]
+        media.first_air_date && media.first_air_date.split("-")[0]
       );
     }
 
@@ -44,7 +45,7 @@ const MediaItem = ({ media, mediaType }) => {
     <Link
       to={
         mediaType !== "people"
-          ? routesGen.mediaDetail(mediaType, media.id || media.mediaId)
+          ? routesGen.mediaDetail(mediaType, media.mediaId || media.id)
           : routesGen.person(media.id)
       }
     >
@@ -52,10 +53,7 @@ const MediaItem = ({ media, mediaType }) => {
         sx={{
           ...uiConfigs.style.backgroundImage(posterPath),
           paddingTop: "160%",
-          "&:hover .media-info": {
-            opacity: 1,
-            bottom: 0,
-          },
+          "&:hover .media-info": { opacity: 1, bottom: 0 },
           "&:hover .media-back-drop, &:hover .media-play-btn": { opacity: 1 },
           color: "primary.contrastText",
         }}
@@ -85,7 +83,7 @@ const MediaItem = ({ media, mediaType }) => {
                 top: 0,
                 left: 0,
                 backgroundImage:
-                  "linear-gradient(to top, rgba(0,0,0,1),rgba(0,0,0,0))",
+                  "linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))",
               }}
             />
             <Button
@@ -93,10 +91,7 @@ const MediaItem = ({ media, mediaType }) => {
               variant="contained"
               startIcon={<PlayArrowIcon />}
               sx={{
-                display: {
-                  xs: "none",
-                  md: "flex",
-                },
+                display: { xs: "none", md: "flex" },
                 opacity: 0,
                 transition: "all 0.3s ease",
                 position: "absolute",
@@ -121,7 +116,9 @@ const MediaItem = ({ media, mediaType }) => {
             >
               <Stack spacing={{ xs: 1, md: 2 }}>
                 {rate && <CircularRate value={rate} />}
+
                 <Typography>{releaseDate}</Typography>
+
                 <Typography
                   variant="body1"
                   fontWeight="700"
@@ -160,4 +157,5 @@ const MediaItem = ({ media, mediaType }) => {
     </Link>
   );
 };
+
 export default MediaItem;
