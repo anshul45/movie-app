@@ -17,7 +17,7 @@ import Container from "./Container";
 import reviewApi from "../../api/modules/review.api";
 import TextAvatar from "./TextAvatar";
 
-const ReviewItem = ({ review, onRemove }) => {
+const ReviewItem = ({ review, onRemoved }) => {
   const { user } = useSelector((state) => state.user);
 
   const [onRequest, setOnRequest] = useState(false);
@@ -164,10 +164,38 @@ const MediaReview = ({ reviews, media, mediaType }) => {
         {user && (
           <>
             <Divider />
-            <Stack direction="row"></Stack>
+            <Stack direction="row" spacing={2}>
+              <TextAvatar text={user.displayName} />
+              <Stack spacing={2} flexGrow={1}>
+                <Typography variant="h6" fontWeight="700">
+                  {user.displayName}
+                </Typography>
+                <TextField
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  multiline
+                  rows={4}
+                  placeholder="Write Your review"
+                  variant="outlined"
+                />
+                <LoadingButton
+                  variant="contained"
+                  size="large"
+                  sx={{ width: "max-content" }}
+                  startIcon={<SendOutlinedIcon />}
+                  loadingPosition="start"
+                  loading={onRequest}
+                  onClick={onAddReview}
+                >
+                  post
+                </LoadingButton>
+              </Stack>
+            </Stack>
           </>
         )}
       </Container>
     </>
   );
 };
+
+export default MediaReview;
