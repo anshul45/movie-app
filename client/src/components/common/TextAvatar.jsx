@@ -6,7 +6,7 @@ const TextAvatar = ({ text }) => {
     let i;
 
     for (i = 0; i < str.length; i += 1) {
-      hash = str.chatCodeAt(i) + ((hash << 5) - hash);
+      hash = str.charCodeAt(i) + ((hash << 5) - hash);
     }
 
     let color = "#";
