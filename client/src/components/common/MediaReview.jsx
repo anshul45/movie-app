@@ -29,8 +29,9 @@ const ReviewItem = ({ review, onRemoved }) => {
     const { response, err } = await reviewApi.remove({ reviewId: review.id });
 
     if (err) toast.error(err.message);
-    if (response) onRemove(review.id);
+    if (response) onRemoved(review.id);
   };
+
   return (
     <Box
       sx={{
@@ -65,10 +66,7 @@ const ReviewItem = ({ review, onRemoved }) => {
               loading={onRequest}
               onClick={onRemove}
               sx={{
-                position: {
-                  xs: "relative",
-                  md: "absolute",
-                },
+                position: { xs: "relative", md: "absolute" },
                 right: { xs: 0, md: "10px" },
                 marginTop: { xs: 2, md: 0 },
                 width: "max-content",
@@ -111,7 +109,9 @@ const MediaReview = ({ reviews, media, mediaType }) => {
       mediaTitle: media.title || media.name,
       mediaPoster: media.poster_path,
     };
+
     const { response, err } = await reviewApi.add(body);
+
     setOnRequest(false);
 
     if (err) toast.error(err.message);
@@ -140,9 +140,12 @@ const MediaReview = ({ reviews, media, mediaType }) => {
     } else {
       setFilteredReviews([...filteredReviews].filter((e) => e.id !== id));
     }
+
     setReviewCount(reviewCount - 1);
+
     toast.success("Remove review success");
   };
+
   return (
     <>
       <Container header={`Reviews (${reviewCount})`}>
@@ -175,7 +178,7 @@ const MediaReview = ({ reviews, media, mediaType }) => {
                   onChange={(e) => setContent(e.target.value)}
                   multiline
                   rows={4}
-                  placeholder="Write Your review"
+                  placeholder="Write your review"
                   variant="outlined"
                 />
                 <LoadingButton
