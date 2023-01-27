@@ -11,7 +11,7 @@ import MediaGrid from "../components/common/MediaGrid";
 import { setAppState } from "../redux/features/appStateSlice";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 import { toast } from "react-toastify";
-import usePrevious from "../hooks/usePrevious";
+import usePrevious from "../hooks/userPrevious";
 
 const MediaList = () => {
   const { mediaType } = useParams();
