@@ -6,21 +6,22 @@ import { useParams } from "react-router-dom";
 import tmdbConfigs from "../api/configs/tmdb.configs";
 import mediaApi from "../api/modules/media.api";
 import uiConfigs from "../configs/ui.configs";
-import usePrevious from "../hooks/userPrevious";
 import HeroSlide from "../components/common/HeroSlide";
-import MediaGrid from "../components/common/MediaGrip";
+import MediaGrid from "../components/common/MediaGrid";
 import { setAppState } from "../redux/features/appStateSlice";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 import { toast } from "react-toastify";
+import usePrevious from "../hooks/usePrevious";
 
 const MediaList = () => {
   const { mediaType } = useParams();
+
   const [medias, setMedias] = useState([]);
   const [mediaLoading, setMediaLoading] = useState(false);
   const [currCategory, setCurrCategory] = useState(0);
   const [currPage, setCurrPage] = useState(1);
-  const prevMediaType = usePrevious(mediaType);
 
+  const prevMediaType = usePrevious(mediaType);
   const dispatch = useDispatch();
 
   const mediaCategories = useMemo(() => ["popular", "top_rated"], []);
@@ -52,8 +53,20 @@ const MediaList = () => {
       }
     };
 
+    if (mediaType !== prevMediaType) {
+      setCurrCategory(0);
+      setCurrPage(1);
+    }
+
     getMedias();
-  }, [mediaType, currCategory, currPage, mediaCategories, dispatch]);
+  }, [
+    mediaType,
+    currCategory,
+    prevMediaType,
+    currPage,
+    mediaCategories,
+    dispatch,
+  ]);
 
   const onCategoryChange = (categoryIndex) => {
     if (currCategory === categoryIndex) return;
@@ -79,7 +92,7 @@ const MediaList = () => {
           sx={{ marginBottom: 4 }}
         >
           <Typography fontWeight="700" variant="h5">
-            {(mediaType = tmdbConfigs.mediaType.movie ? "Movies" : "TV Series")}
+            {mediaType === tmdbConfigs.mediaType.movie ? "Movies" : "TV Series"}
           </Typography>
           <Stack direction="row" spacing={2}>
             {category.map((cate, index) => (
@@ -102,9 +115,7 @@ const MediaList = () => {
         </Stack>
         <MediaGrid medias={medias} mediaType={mediaType} />
         <LoadingButton
-          sx={{
-            marginTop: 8,
-          }}
+          sx={{ marginTop: 8 }}
           fullWidth
           color="primary"
           loading={mediaLoading}
