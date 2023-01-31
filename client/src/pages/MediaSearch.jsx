@@ -94,6 +94,7 @@ const MediaSearch = () => {
           />
 
           <MediaGrid medias={medias} mediaType={mediaType} />
+          {medias.length > 0 && <LoadingButton>load more</LoadingButton>}
         </Stack>
       </Box>
     </>
