@@ -14,6 +14,7 @@ const PersonMediaGrid = ({ personId }) => {
   useEffect(() => {
     const getMedias = async () => {
       const { response, err } = await personApi.medias({ personId });
+
       if (err) toast.error(err.message);
       if (response) {
         const mediasSorted = response.cast.sort(
@@ -23,8 +24,10 @@ const PersonMediaGrid = ({ personId }) => {
         setFilteredMedias([...mediasSorted].splice(0, skip));
       }
     };
+
     getMedias();
   }, [personId]);
+
   const getReleaseDate = (media) => {
     const date =
       media.media_type === tmdbConfigs.mediaType.movie
@@ -56,4 +59,5 @@ const PersonMediaGrid = ({ personId }) => {
     </>
   );
 };
+
 export default PersonMediaGrid;

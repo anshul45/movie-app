@@ -14,14 +14,17 @@ const PersonDetail = () => {
   const { personId } = useParams();
   const [person, setPerson] = useState();
   const dispatch = useDispatch();
+
   useEffect(() => {
     const getPerson = async () => {
       dispatch(setGlobalLoading(true));
       const { response, err } = await personApi.detail({ personId });
       dispatch(setGlobalLoading(false));
+
       if (err) toast.error(err.message);
       if (response) setPerson(response);
     };
+
     getPerson();
   }, [personId]);
 
@@ -38,7 +41,11 @@ const PersonDetail = () => {
                 flexDirection: { xs: "column", md: "row" },
               }}
             >
-              <Box sx={{ width: { xs: "50%", md: "20%" } }}>
+              <Box
+                sx={{
+                  width: { xs: "50%", md: "20%" },
+                }}
+              >
                 <Box
                   sx={{
                     paddingTop: "160%",
@@ -54,13 +61,16 @@ const PersonDetail = () => {
               <Box
                 sx={{
                   width: { xs: "100%", md: "80%" },
-                  padding: { xs: "1rem 0", md: "1rem,2rem" },
+                  padding: { xs: "1rem 0", md: "1rem 2rem" },
                 }}
               >
                 <Stack spacing={2}>
                   <Typography variant="h5" fontWeight="700">
-                    {`${person.name} (${person.birthday.split("-")[0]})`}
-                    {person.deathday && ` - ${person.deathday.split("-")[0]}`}
+                    {`${person.name} (${
+                      person.birthday && person.birthday.split("-")[0]
+                    }`}
+                    {person.deathday &&
+                      ` - ${person.deathday && person.deathday.split("-")[0]}`}
                     {")"}
                   </Typography>
                   <Typography sx={{ ...uiConfigs.style.typoLines(10) }}>
