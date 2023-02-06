@@ -15,17 +15,16 @@ import { routesGen } from "../routes/routes";
 
 const ReviewItem = ({ review, onRemoved }) => {
   const [onRequest, setOnRequest] = useState(false);
+
   const onRemove = async () => {
     if (onRequest) return;
     setOnRequest(true);
-    const { response, err } = await reviewApi.remove({
-      reviewId: review.id,
-    });
+    const { response, err } = await reviewApi.remove({ reviewId: review.id });
     setOnRequest(false);
 
     if (err) toast.error(err.message);
     if (response) {
-      toast.success("Remove review sucess");
+      toast.success("Remove review success");
       onRemoved(review.id);
     }
   };
@@ -41,11 +40,7 @@ const ReviewItem = ({ review, onRemoved }) => {
         "&:hover": { backgroundColor: "background.paper" },
       }}
     >
-      <Box
-        sx={{
-          width: { xs: 0, md: "10%" },
-        }}
-      >
+      <Box sx={{ width: { xs: 0, md: "10%" } }}>
         <Link
           to={routesGen.mediaDetail(review.mediaType, review.mediaid)}
           style={{ color: "unset", textDecoration: "none" }}
@@ -60,6 +55,7 @@ const ReviewItem = ({ review, onRemoved }) => {
           />
         </Link>
       </Box>
+
       <Box
         sx={{
           width: { xs: "100%", md: "80%" },
@@ -84,6 +80,7 @@ const ReviewItem = ({ review, onRemoved }) => {
           <Typography>{review.content}</Typography>
         </Stack>
       </Box>
+
       <LoadingButton
         variant="contained"
         sx={{
@@ -126,6 +123,7 @@ const ReviewList = () => {
         setFilteredReviews([...response].splice(0, skip));
       }
     };
+
     getReviews();
   }, []);
 
@@ -139,10 +137,12 @@ const ReviewList = () => {
 
   const onRemoved = (id) => {
     const newReviews = [...reviews].filter((e) => e.id !== id);
+
     setReviews(newReviews);
     setFilteredReviews([...newReviews].splice(0, page * skip));
     setCount(count - 1);
   };
+
   return (
     <Box sx={{ ...uiConfigs.style.mainContent }}>
       <Container header={`Your reviews (${count})`}>
