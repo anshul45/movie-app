@@ -1,8 +1,8 @@
 {
-  "name": "mern-stack-movie-2023",
+  "name": "mern-stack-movie-2022",
   "type": "module",
   "version": "0.0.1",
-  "author": "tuat tran anh",
+  "author": "Anshul garwal",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
